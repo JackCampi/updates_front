@@ -8,17 +8,29 @@ class UTable {
   List<List<dynamic>> _data = List.empty(growable: true);
   List<UHeader> _columns = [];
 
-  List _size = [0, 0];
+  List size = [0, 0];
 
   void fillNan() {
     for (int row = 0; row < _data.length; row++) {
-      if (_data[row].length != _size[1]) {
+      if (_data[row].length != size[1]) {
         _data[row] = [
           ..._data[row],
-          for (int i = 0; i < _size[1] - _data[row].length; i++) "nan"
+          for (int i = 0; i < size[1] - _data[row].length; i++) "nan"
         ];
       }
     }
+  }
+
+  UHeader getColunm(int index) {
+    return _columns[index];
+  }
+
+  List<UHeader> getColunms() {
+    return _columns;
+  }
+
+  dynamic operator [](int index) {
+    return _data[index];
   }
 
   void defaultNamesConstruction(Iterable<Iterable<dynamic>> elements) {
@@ -42,7 +54,7 @@ class UTable {
     _columns = [
       for (var i = 0; i < nColumns; i++) UHeader("col $i", widths[i])
     ];
-    _size = [_data.length, nColumns];
+    size = [_data.length, nColumns];
 
     fillNan();
   }
@@ -76,7 +88,7 @@ class UTable {
     _columns = [
       for (var i = 0; i < names.length; i++) UHeader(names[i], widths[i])
     ];
-    _size = [_data.length, names.length];
+    size = [_data.length, names.length];
 
     fillNan();
   }
@@ -209,7 +221,7 @@ class UTable {
         for (var i = 0; i < _data[0].length; i++) UHeader('col $i', widths[i])
       ];
     }
-    _size = [_data.length, _data[0].length];
+    size = [_data.length, _data[0].length];
   }
 
   @override
@@ -276,7 +288,7 @@ class UTable {
     }
 
     s += "\n";
-    s += "size: $_size\n";
+    s += "size: $size\n";
 
     return s;
   }

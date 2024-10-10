@@ -8,6 +8,7 @@ class System {
 
   final Color primaryColor = const Color.fromARGB(255, 129, 88, 159);
   final Color softPrimaryColor = const Color.fromARGB(255, 215, 162, 232);
+  final Color cellevenColor = const Color.fromARGB(64, 214, 162, 232);
   final Color grayColor = const Color.fromARGB(255, 237, 237, 237);
 
   final double roundValue = 20;

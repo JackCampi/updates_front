@@ -20,7 +20,7 @@ class MainApp extends StatelessWidget {
         initialRoute: '/',
         routes: {
           // When navigating to the "/second" route, build the SecondScreen widget.
-          '/upload': (context) => UploadFile(),
+          UploadFile.routeName: (context) => UploadFile(),
           ReadTable.routeName: (context) => ReadTable()
         },
         debugShowCheckedModeBanner: false,

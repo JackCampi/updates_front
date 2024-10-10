@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class UploadFile extends StatefulWidget {
+  static const routeName = '/upload';
   @override
   State<StatefulWidget> createState() => _UploadFileState();
 }
@@ -112,9 +113,10 @@ class _UploadFileState extends State<UploadFile> {
                         height: System.get().height * 0.06,
                         width: System.get().width * 0.13,
                         onTap: () {
-                          //print(uTableController.table);
+                          print(uTableController.table);
                           if (uTableController.table != null) {
-                            Navigator.pushNamed(context, ReadTable.routeName);
+                            Navigator.pushNamed(context, ReadTable.routeName,
+                                arguments: uTableController.table);
                           } else {
                             fToast.showToast(
                                 child: const UToast(

@@ -1,4 +1,10 @@
+import 'dart:developer';
+
 import 'package:UAPPA/config/system.dart';
+import 'package:UAPPA/dto/u_table.dart';
+import 'package:UAPPA/dto/u_table_controller.dart';
+import 'package:UAPPA/pages/files/upload_file.dart';
+import 'package:UAPPA/widget/table/u_sheet.dart';
 import 'package:UAPPA/widget/u_button.dart';
 import 'package:UAPPA/widget/u_text.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +20,15 @@ class _ReadTableState extends State<ReadTable> {
   Widget build(BuildContext context) {
     System.get().width = MediaQuery.sizeOf(context).width;
     System.get().height = MediaQuery.sizeOf(context).height;
+
+    UTable uTable = UTable.of([]);
+    try {
+      uTable = ModalRoute.of(context)!.settings.arguments as UTable;
+    } on TypeError {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        Navigator.pushNamed(context, UploadFile.routeName);
+      });
+    }
     return Scaffold(
       backgroundColor: Colors.white,
       body: Container(
@@ -46,7 +61,7 @@ class _ReadTableState extends State<ReadTable> {
               child: Container(
                 width: double.infinity,
                 color: System.get().grayColor,
-                child: UText("text", 18),
+                child: USheet(uTable),
               ),
             )
           ],
